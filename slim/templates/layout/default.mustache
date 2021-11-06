@@ -1,0 +1,40 @@
+{{% BLOCKS }}
+{{% FILTERS}}
+<!DOCTYPE html>
+<html lang="{{ language }}">
+<head>
+    <title>{{ title }}</title>
+    <meta charset="UTF-8">
+    {{$ stylesheets }}
+        <link rel="stylesheet" href="/assets/css/tailwind.min.css">
+    {{/ stylesheets }}
+</head>
+<body class="font-mono">
+<div class="container mx-auto">
+    {{#flashMessage}}
+        <div class="{{type|messageClass}}">{{message}}</div>
+    {{/flashMessage}}
+    <header class="w-full mb-8 items-center">
+        {{$ header }}<h1 class="text-6xl py-8">{{ title }}</h1>
+            {{>snippets/searchForm}}
+        {{/ header }}
+
+    </header>
+    <div id="content" class="flex">
+        <div class="flex-initial mr-4 p-2">
+            {{$ navi }}
+                {{>snippets/navi}}
+            {{/ navi }}
+        </div>
+        <div class="flex w-full p-2">
+            {{$ content }}{{/ content }}
+        </div>
+
+    </div>
+</div>
+
+{{$ scripts }}
+    <script src="/assets/js/main.js" defer></script>
+{{/ scripts }}
+</body>
+</html>

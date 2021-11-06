@@ -1,0 +1,13 @@
+{
+    "require": {
+        "slim/slim": "^4.9",
+        "slim/psr7": "^1.5",
+        "php-di/php-di": "^6.3",
+        "mustache/mustache": "^2.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "BlackScorp\\Movies\\": "src/"
+        }
+    }
+}

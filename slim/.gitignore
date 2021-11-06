@@ -1,0 +1,4 @@
+.ddev/
+vendor
+.env
+.idea/

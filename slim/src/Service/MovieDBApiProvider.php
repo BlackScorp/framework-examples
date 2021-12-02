@@ -30,4 +30,32 @@ final class MovieDBApiProvider
         }
         return [];
     }
+
+    public function findById(int $movieId):array
+    {
+        $response = $this->client->get('movie/'.$movieId, [
+            'query' => [
+                'api_key'=>$this->apiKey,
+            ],
+        ]);
+        if($response->getStatusCode() === 200) {
+            return json_decode((string)$response->getBody(), true);
+
+        }
+        return [];
+    }
+
+    public function getImageBaseUrl($size = 'w300'):string
+    {
+        $response = $this->client->get('configuration',[
+            'query' => [
+                'api_key'=>$this->apiKey,
+            ],
+        ]);
+        if($response->getStatusCode() === 200){
+            $data = json_decode((string)$response->getBody(),true);
+            return $data['images']['secure_base_url'].$size;
+        }
+        return '';
+    }
 }

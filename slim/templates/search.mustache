@@ -1,7 +1,15 @@
 {{% BLOCKS }}
 {{< layout/default }}
     {{$ content }}
-
+        <div class="flex flex-col">
+        {{#videoList}}
+            <div class="m-4">
+                 {{>snippets/video}}
+                 <a href="/index/add/{{id}}" class="border-2 rounded-md p-2 bg-green-500">Habe ich</a>
+                 <a href="/index/add/{{id}}/wish" class="border-2 rounded-md p-2 bg-blue-500">Will ich</a>
+            </div>
+        {{/videoList}}
+        </div>
     {{/ content }}
 
 {{/layout/default }}

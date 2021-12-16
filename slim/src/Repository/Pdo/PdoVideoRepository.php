@@ -17,6 +17,7 @@ final class PdoVideoRepository implements VideoRepository
         'releaseDate',
         'imagePath',
         'rentedTo',
+        'owned'
     ];
     /**
      * @param PDO $PDO
@@ -40,4 +41,23 @@ final class PdoVideoRepository implements VideoRepository
        $statement->execute($video->toArray());
     }
 
+    private function loadAllModels(bool $owned = true):array {
+        $sql = "SELECT ".implode(",",$this->fields)." FROM movies WHERE owned = :owned";
+        $statement = $this->PDO->prepare($sql);
+        $statement->execute([':owned'=>$owned]);
+        if($statement->rowCount() === 0){
+            return [];
+        }
+        $statement->setFetchMode(PDO::FETCH_CLASS,VideoModel::class);
+        return $statement->fetchAll();
+    }
+    public function findOwned(): array
+    {
+     return $this->loadAllModels();
+    }
+
+    public function findWished()
+    {
+        return $this->loadAllModels(false);
+    }
 }

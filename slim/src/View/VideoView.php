@@ -2,6 +2,8 @@
 
 namespace BlackScorp\Movies\View;
 
+use BlackScorp\Movies\Model\VideoModel;
+
 final class VideoView
 {
     public int $id;
@@ -24,5 +26,18 @@ final class VideoView
         }
 
         return $videoView;
+    }
+
+    public static function createFromEntity(VideoModel $model):self{
+        $view = new self();
+        $view->id = $model->getId();
+        $view->title = $model->getTitle();
+        $view->overview = $model->getOverview();
+        $view->imagePath = $model->getImagePath();
+        $view->releaseDate = (\DateTime::createFromFormat('Y-m-d',$model->getReleaseDate()))->format('d.M.Y');
+        $view->rentedTo = $model->getRentedTo();
+        $view->isOwned = $model->isOwned();
+
+        return  $view;
     }
 }
